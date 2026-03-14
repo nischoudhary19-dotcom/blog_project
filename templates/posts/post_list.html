@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Blog Posts</h1>
+
+{% for post in posts %}
+
+<div class="blog" style="margin-bottom: 40ox; display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;">
+
+    <!-- post image -->
+     {% if post.image %}
+                <img src="{{ post.image.url }}" width="300">
+     {% endif %}
+     <p>Author:{{post.author }}</p>
+     <p>Category:{{ post.category }}</p>
+
+     <!-- small preview -->
+      <p>{{ post.content|truncatewords:30|safe }}</p>
+
+      <!-- for read more -->
+       <a href="{% url 'post_detail' post.slug %}">Read More</a>
+</div>
+<hr>
+
+{% endfor %}
+</body>
+</html>
