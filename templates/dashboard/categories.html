@@ -1,0 +1,31 @@
+{% extends "dashboard_base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Categories</h2>
+
+<table class="table">
+
+<thead>
+<tr>
+<th>Name</th>
+<th>Slug</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for category in categories %}
+
+<tr>
+<td>{{ category.name }}</td>
+<td>{{ category.slug }}</td>
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+{% endblock %}

@@ -125,8 +125,11 @@ AUTH_USER_MODEL = 'account.User'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-LOGIN_REDIRECT_URL = "/dashboard/"
-LOGOUT_REDIRECT_URL = "/posts/"
+# Authentication redirects
+LOGIN_URL = "/accounts/login/"
+LOGIN_REDIRECT_URL = "/posts/dashboard/"
+LOGOUT_REDIRECT_URL = "post_list"
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# We did not connect a real email service yet
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

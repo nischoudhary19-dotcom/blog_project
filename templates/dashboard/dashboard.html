@@ -1,0 +1,80 @@
+{% extends "dashboard_base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Dashboard</h2>
+
+<div class="card p-3 shadow-sm">
+
+<table class="table table-hover align-middle">
+
+<thead class="table-dark">
+<tr>
+    <th>Title</th>
+    <th>Slug</th>
+    <th>Status</th>
+    <th>Created</th>
+    <th>Actions</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for post in posts %}
+
+<tr>
+
+    <!-- Title -->
+    <td>{{ post.title }}</td>
+
+    <!-- Slug -->
+    <td>
+        {% if post.slug %}
+            <code>{{ post.slug }}</code>
+        {% else %}
+            <span class="text-danger">No slug</span>
+        {% endif %}
+    </td>
+
+    <!-- Status -->
+    <td>
+        {% if post.status == "published" %}
+            <span class="badge bg-success">Published</span>
+        {% else %}
+            <span class="badge bg-warning text-dark">Draft</span>
+        {% endif %}
+    </td>
+
+    <!-- Date -->
+    <td>{{ post.created_at|date:"M d, Y" }}</td>
+
+    <!-- Actions -->
+    <td>
+
+        {% if post.slug %}
+        <a href="{% url 'post_detail' post.slug %}" class="btn btn-sm btn-primary">
+            View
+        </a>
+        {% endif %}
+
+        <a href="{% url 'edit_post' post.pk %}" class="btn btn-sm btn-warning">
+            Edit
+        </a>
+
+        <a href="{% url 'delete_post' post.pk %}" class="btn btn-sm btn-danger">
+            Delete
+        </a>
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}
