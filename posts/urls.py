@@ -15,7 +15,12 @@ urlpatterns = [
     path("dashboard/delete/<int:pk>/", views.delete_post, name="delete_post"),
 
     path("dashboard/categories/", views.categories, name="categories"),
+    path("dashboard/tags/", views.tags, name="tags"),
+    path('like/<int:pk>/', views.toggle_like, name='toggle_like'),
+    path('dashboard/profile/', views.profile, name='profile'),
 
     # ✅ ALWAYS LAST
     path("<slug:slug>/", views.post_detail, name="post_detail"),
+    path("try",views.trya,name='try'),
+    
 ]

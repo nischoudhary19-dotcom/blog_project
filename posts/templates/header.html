@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <title>Hamburger Menu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <!-- Google Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ 
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+ 
+    <link rel="stylesheet" href="{% static 'posts/css/header.css' %}">
+ 
+</head>
+ 
+<body>
+ 
+    <div class="center">
+        <div class="menu">
+ 
+            <!-- Hidden Checkbox -->
+            <input type="checkbox" id="menu">
+ 
+            <!-- Logo + Hamburger -->
+            <div class="logo">
+                Ace
+                <label for="menu"></label>
+            </div>
+ 
+            <!-- Menu Items -->
+            <div class="items">
+                {% include "menu.html" %}
+                <a href="/auth/user_profile/" class="item">My Profile</a>
+                <a href="/auth/logout/" class="item">Logout</a>
+               
+                   
+               
+            </div>
+ 
+        </div>
+    </div>
+ 
+</body>
+ 
+</html>
+ 

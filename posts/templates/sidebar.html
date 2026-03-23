@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'posts/css/sidebar.css' %}">
+</head>
+ 
+<body>
+ 
+    <div class="sidebar">
+        <div class="sidebar-menu">
+ 
+            {% if request.user.is_staff %}
+            <a href="{% url 'dashboard' %}" class="side-item {% if request.path == '/' %}active{% endif %}">
+                <span class="material-icons">dashboard</span>
+                <span class="text">Dashboard</span>
+            </a>
+            {% endif %}
+ 
+            <a href="{% url 'post_list' %}" class="side-item {% if request.path == '/all-posts/' %}active{% endif %}">
+                <span class="material-icons">home</span>
+                <span class="text">Home</span>
+            </a>
+ 
+            <a href="{% url 'create_post' %}" class="side-item {% if request.path == '/add-post/' %}active{% endif %}">
+                <span class="material-icons">create</span>
+                <span class="text">Add Post</span>
+            </a>
+ 
+            <a href="{% url 'categories' %}" class="side-item {% if request.path == '/my-posts/' %}active{% endif %}">
+                <span class="material-icons">favorite</span>
+                <span class="text">My Posts</span>
+            </a>
+        </div>
+    </div>
+</body>
+ 
+</html>
+ 

@@ -1,0 +1,183 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+body {
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(235, 236, 242);
+    font-family: "Poppins", sans-serif;
+}
+ 
+/* Center container */
+.center {
+    width: 100%;
+}
+ 
+/* Navbar */
+.menu {
+    width: 100%;
+    background: rgb(37, 38, 53);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+ 
+/* Hide checkbox */
+#menu {
+    display: none;
+}
+ 
+/* Logo */
+.logo {
+    font-size: 28px;
+    font-weight: 600;
+    color: white;
+    padding: 15px 0;
+}
+ 
+/* Menu items (Desktop) */
+.items {
+    margin-left: auto;    
+    display: flex;
+    align-items: center;
+}
+ 
+.item {
+    padding: 10px 18px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5mm;
+    transition: 0.3s;
+}
+ 
+.item:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+ 
+.s-item {
+    padding: 10px 18px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5mm;
+    transition: 0.3s;
+}
+ 
+.s-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+ 
+ 
+ 
+/*sidebar-icons*/
+ 
+ 
+/* Hamburger icon (hidden on desktop) */
+.logo label {
+    display: none;
+}
+ 
+/* ================= MOBILE ================= */
+ 
+@media screen and (max-width: 650px) {
+ 
+    .menu {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+ 
+    .logo {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;  /* Logo left, icon right */
+        align-items: center;
+    }
+ 
+    /* Show hamburger */
+    .logo label {
+        display: block;
+        cursor: pointer;
+    }
+ 
+    .logo label::before {
+        content: "menu";
+        font-family: "Material Icons";
+        font-size: 32px;
+        color: white;
+    }
+ 
+    /* Hide menu initially */
+    .items {
+        width: 100%;
+        flex-direction: column;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-in-out;
+    }
+ 
+    .item {
+        width: 100%;
+        padding: 15px;
+        border-top: 1px solid rgb(52, 53, 71);
+        border-radius: 0;
+    }
+    .s-item {
+        width: 100%;
+        padding: 15px;
+        border-top: 1px solid rgb(52, 53, 71);
+        border-radius: 0;
+    }
+ 
+    /* When checkbox checked */
+    #menu:checked ~ .items {
+        max-height: 500px;
+    }
+ 
+    #menu:checked ~ .logo label::before {
+        content: "close";
+    }
+}
+header, .center {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 60px;
+}
+body {
+    padding-top: 60px; /* same as header height */
+}
+ 
+/* ================= DESKTOP ================= */
+@media screen and (min-width: 651px){
+ 
+    /* Show normal header items */
+    .item {
+        display: inline-flex;
+    }
+ 
+    /* Hide sidebar items in header */
+    .s-item {
+        display: none;
+    }
+}
+ 
+ 
+/* ================= MOBILE ================= */
+@media screen and (max-width: 650px){
+ 
+    /* Hide normal header items */
+    .item {
+        display: block;
+    }
+ 
+    /* Show sidebar items in hamburger */
+    .s-item {
+        display: block;
+        width: 100%;
+    }
+}
+ 

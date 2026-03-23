@@ -1,0 +1,31 @@
+{% extends "dashboard_base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <h2 class="mb-4">🏷️ Tags</h2>
+
+    <!-- Create Tag -->
+    <form method="POST" class="mb-4">
+        {% csrf_token %}
+        <div class="input-group">
+            <input type="text" name="name" class="form-control" placeholder="Enter tag name" required>
+            <button class="btn btn-primary">Add</button>
+        </div>
+    </form>
+
+    <!-- Tag List -->
+    <ul class="list-group">
+        {% for tag in tags %}
+            <li class="list-group-item">
+                {{ tag.name }}
+            </li>
+        {% empty %}
+            <li class="list-group-item">No tags yet</li>
+        {% endfor %}
+    </ul>
+
+</div>
+
+{% endblock %}

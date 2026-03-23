@@ -6,7 +6,7 @@ from .models import User
 class CustomUserAdmin(UserAdmin):
     fieldsets = UserAdmin.fieldsets + (
         ("Additional Info", {
-            "fields": ( "","bio"),
+            "fields": ( "bio",),
         }),
     )
     model = User

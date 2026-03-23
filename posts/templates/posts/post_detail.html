@@ -1,0 +1,143 @@
+{% extends "dashboard_base.html" %}
+
+{% block content %}
+
+<div class="container mt-4" style="max-width: 800px;">
+
+    <!-- Title -->
+    <h1 class="mb-2">{{ post.title }}</h1>
+
+    <!-- Meta -->
+    <p class="text-muted">
+        Author: {{ post.author }} | Published on: {{ post.created_at }}
+    </p>
+
+    <!-- Image -->
+    {% if post.image %}
+        <img src="{{ post.image.url }}" class="img-fluid rounded mb-4">
+    {% endif %}
+
+    <!-- Content -->
+    <div class="mb-4">
+        {{ post.content|safe }}
+    </div>
+
+    <!--  Like Section -->
+    <div class="mb-3">
+
+        <button id="like-btn"
+                data-id="{{ post.pk }}"
+                class="btn {% if is_liked %}btn-danger{% else %}btn-outline-primary{% endif %}">
+            
+            <span id="like-text">
+                {% if is_liked %}❤️ Liked{% else %}🤍 Like{% endif %}
+            </span>
+            (<span id="like-count">{{ post.likes.count }}</span>)
+        </button>
+
+        {% if is_liked %}
+            <span class="ms-2 text-danger fw-semibold">You liked this ❤️</span>
+        {% endif %}
+            {% csrf_token %}
+            <button type="submit"
+                class="btn {% if is_liked %}btn-danger{% else %}btn-outline-primary{% endif %}">
+                
+                {% if is_liked %}
+                    ❤️ Liked
+                {% else %}
+                    🤍 Like
+                {% endif %}
+                ({{ post.likes.count }})
+            </button>
+        </form>
+
+        <!-- Show if liked -->
+        {% if is_liked %}
+            <span class="ms-2 text-danger fw-semibold">You liked this ❤️</span>
+        {% endif %}
+        </div>
+
+    <!-- Edit/Delete -->
+    {% if can_edit %}
+        <div class="mb-3">
+            <a href="{% url 'edit_post' post.pk %}" class="btn btn-warning btn-sm">Edit</a>
+            <a href="{% url 'delete_post' post.pk %}" class="btn btn-danger btn-sm">Delete</a>
+        </div>
+    {% endif %}
+
+    <hr>
+
+    <!-- 💬 Comments -->
+    <h4 class="mb-3">💬 Comments ({{ post.comments.count }})</h4>
+
+    {% for comment in comments %}
+        <div class="card mb-2 p-2 shadow-sm">
+            <strong>{{ comment.user }}</strong>
+            <p class="mb-1">{{ comment.content }}</p>
+            <small class="text-muted">{{ comment.created_at }}</small>
+        </div>
+    {% empty %}
+        <p class="text-muted">No comments yet</p>
+    {% endfor %}
+
+    <hr>
+
+    <!-- ✍️ Add Comment -->
+    {% if user.is_authenticated %}
+        <h5 class="mb-2">Add Comment</h5>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <textarea 
+                name="content" 
+                class="form-control mb-2"
+                rows="2"
+                placeholder="💬 Write a comment..."
+                style="resize:none; border-radius:10px;">
+            </textarea>
+
+            <button class="btn btn-success btn-sm">
+                Post Comment
+            </button>
+        </form>
+    {% else %}
+        <p class="text-muted">Please login to comment</p>
+    {% endif %}
+
+</div>
+<script>
+document.getElementById("like-btn").addEventListener("click", function(){
+
+    let postId = this.dataset.id;
+
+    fetch(`/like/${postId}/`, {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": "{{ csrf_token }}",
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+
+        let btn = document.getElementById("like-btn");
+        let text = document.getElementById("like-text");
+        let count = document.getElementById("like-count");
+
+        count.innerText = data.count;
+
+        if(data.liked){
+            btn.classList.remove("btn-outline-primary");
+            btn.classList.add("btn-danger");
+            text.innerText = "❤️ Liked";
+        } else {
+            btn.classList.remove("btn-danger");
+            btn.classList.add("btn-outline-primary");
+            text.innerText = "🤍 Like";
+        }
+    });
+
+});
+</script>
+
+{% endblock %}

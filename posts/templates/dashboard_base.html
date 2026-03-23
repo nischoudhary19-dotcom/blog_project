@@ -1,6 +1,8 @@
+{% load custom_tags %}
 <!DOCTYPE html>
 <html>
 <head>
+   
 
 <title>Dashboard</title>
 
@@ -23,6 +25,7 @@ padding:0 25px;
 position:fixed;
 width:100%;
 top:0;
+z-index: 1000;
 }
 
 .sidebar{
@@ -55,6 +58,7 @@ padding:30px;
 </style>
 
 </head>
+{{ form.media }}
 
 <body>
 
@@ -64,16 +68,28 @@ padding:30px;
 
 <h5>My Blog Dashboard</h5>
 
-<div>
+<div class="d-flex align-items-center gap-2">
 
-Hello {{ user.username }}
+    <!-- Profile Image -->
+    {% if user.profile_image %}
+        <img src="{{ user.profile_image.url }}" 
+             style="height:35px; width:35px; border-radius:50%;">
+    {% else %}
+        <div style="height:35px; width:35px; border-radius:50%; background:#ccc; display:flex; align-items:center; justify-content:center;">
+            {{ user.username|first|upper }}
+        </div>
+    {% endif %}
 
-<form method="POST" action="{% url 'logout' %}" style="display:inline;">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-outline-light btn-sm">
-        Logout
-    </button>
-</form>
+    <!-- Username clickable -->
+    <a href="{% url 'profile' %}" style="color:white; text-decoration:none;">
+        {{ user.username }}
+    </a>
+
+    <!-- Logout -->
+    <form method="POST" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button class="btn btn-outline-light btn-sm">Logout</button>
+    </form>
 
 </div>
 
@@ -82,18 +98,17 @@ Hello {{ user.username }}
 
 <!-- Sidebar -->
 
+{% if not user|has_group:"Readers" %}
 <div class="sidebar">
 
 <a href="{% url 'dashboard' %}">Dashboard</a>
-
 <a href="{% url 'my_posts' %}">My Posts</a>
-
 <a href="{% url 'create_post' %}">Create Post</a>
-
 <a href="{% url 'categories' %}">Categories</a>
+<a href="{% url 'tags' %}">Tags</a>
 
 </div>
-
+{% endif %}
 
 <div class="main-content">
 

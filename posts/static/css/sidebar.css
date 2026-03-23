@@ -1,0 +1,94 @@
+/* Sidebar */
+ 
+.sidebar{
+    position: fixed;
+    top: 72px;
+    left: 0;
+    width: 220px;
+    height: 100%;
+    background: rgb(37,38,53);
+    transition: width 0.3s;
+    overflow: hidden;
+}
+ 
+/* Menu container */
+ 
+.sidebar-menu{
+    display: flex;
+    flex-direction: column;
+}
+ 
+/* Menu item */
+ 
+.side-item{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 14px 20px;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+ 
+.side-item:hover{
+    background: rgba(255,255,255,0.15);
+}
+ 
+/* Icons */
+ 
+.side-item .material-icons{
+    font-size: 24px;
+}
+ 
+/* Text */
+ 
+.text{
+    white-space: nowrap;
+}
+ 
+/* ================= DESKTOP ================= */
+ 
+@media screen and (min-width: 651px){
+ 
+    .sidebar:hover{
+        width: 220px;
+    }
+ 
+}
+ 
+ 
+/* ================= MOBILE ================= */
+@media screen and (max-width: 650px){
+ 
+    .sidebar{
+        display: none;
+    }
+    .side-item{
+        display: none;
+    }
+ 
+}
+ 
+/* ================= MOBILE ================= */
+@media screen and (max-width: 650px){
+ 
+    /* Completely remove sidebar */
+    .sidebar{
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+    }
+ 
+    /* Remove any sidebar items if somehow outside */
+    .sidebar-menu,
+    .side-item {
+        display: none !important;
+    }
+ 
+    /* Fix content shifting */
+    .content {
+        margin-left: 0 !important;
+    }
+}
+ 

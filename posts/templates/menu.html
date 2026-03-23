@@ -1,0 +1,7 @@
+{% load static %}
+{% if request.user.is_staff %}
+<a href="{% url 'dashboard' %}" class="s-item">Dashboard</a>
+{% endif %}
+<a href="{% url 'post_list' %}" class="s-item">All Posts</a>
+<a href="{% url 'create_post' %}" class="s-item">Add Post</a>
+<a href="{% url 'categories' %}" class="s-item">My Posts</a>

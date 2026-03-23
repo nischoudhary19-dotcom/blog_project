@@ -1,0 +1,32 @@
+{% extends "dashboard_base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <h2 class="mb-4"> Categories</h2>
+
+    <!--  Create Category Form -->
+    <form method="POST" class="mb-4">
+        {% csrf_token %}
+
+        <div class="input-group">
+            <input type="text" name="name" class="form-control" placeholder="Enter category name" required>
+            <button class="btn btn-primary">Add</button>
+        </div>
+    </form>
+
+    <!--  Category List -->
+    <ul class="list-group">
+        {% for category in categories %}
+            <li class="list-group-item">
+                {{ category.name }}
+            </li>
+        {% empty %}
+            <li class="list-group-item">No categories yet</li>
+        {% endfor %}
+    </ul>
+
+</div>
+
+{% endblock %}

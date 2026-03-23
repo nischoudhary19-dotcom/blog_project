@@ -1,0 +1,255 @@
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+}
+
+/* ================= LAYOUT ================= */
+.page-layout {
+    display: flex;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar {
+    position: fixed;
+    top: 72px;
+    left: 0;
+    width: 220px;
+    height: 100%;
+    background: rgb(37,38,53);
+    transition: width 0.3s;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+/* Sidebar Menu */
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sidebar Items */
+.side-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 14px 20px;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.side-item:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+.side-item .material-icons {
+    font-size: 24px;
+}
+
+.text {
+    white-space: nowrap;
+}
+
+/* ================= MAIN CONTENT ================= */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    margin-left: 220px; /* 🔥 Prevent sidebar overlap */
+    transition: 0.3s;
+}
+
+/* ================= POSTS GRID ================= */
+.posts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+/* ================= CARD ================= */
+.post-card {
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 500px; /* 🔥 Fix long cards */
+
+    transition: 0.2s;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+}
+
+/* ================= IMAGE ================= */
+.blogcard-thumbnail-wrapper {
+    height: 150px;
+    overflow: hidden;
+}
+
+.blogcard-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ================= INFO ================= */
+.post-info {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* TITLE */
+.post-info h2 {
+    font-size: 16px;
+    margin-bottom: 5px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 🔥 max 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* AUTHOR */
+.post-info span {
+    font-size: 11px;
+    color: gray;
+}
+
+/* CONTENT */
+.post-info p {
+    font-size: 13px;
+    margin: 8px 0;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* 🔥 max 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    flex-grow: 1;
+}
+
+/* ================= ACTIONS ================= */
+.post-actions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    padding-top: 8px;
+    border-top: 1px solid #eee;
+}
+
+/* BUTTONS */
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.2s;
+}
+
+.action-btn:hover {
+    transform: scale(1.2);
+}
+
+/* LIKE */
+.action-btn.liked {
+    color: red;
+}
+
+.action-btn.not-liked {
+    color: #777;
+}
+
+/* ================= LIKE COUNT ================= */
+.likes-count {
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* ================= READ MORE ================= */
+.read-more {
+    margin-top: 8px;
+    text-align: center;
+    padding: 6px;
+    font-size: 13px;
+
+    background: #2d8cf0;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+.read-more:hover {
+    background: #1b6fdc;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* 📱 MOBILE */
+@media (max-width: 650px) {
+
+    .sidebar {
+        display: none !important;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 10px;
+    }
+
+    .posts-container {
+        grid-template-columns: 1fr;
+    }
+
+    .blogcard-thumbnail-wrapper {
+        height: 140px;
+    }
+}
+
+/* 📲 TABLET */
+@media (min-width: 651px) and (max-width: 1024px) {
+
+    .sidebar {
+        width: 70px;
+    }
+
+    .main-content {
+        margin-left: 70px;
+    }
+
+    .posts-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 💻 DESKTOP */
+@media (min-width: 1025px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .main-content {
+        margin-left: 220px;
+    }
+
+    .posts-container {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+}
